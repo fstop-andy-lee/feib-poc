@@ -10,7 +10,7 @@
   
 	<groupId>com.feib.business.api</groupId>
 	<artifactId>creditcard-business</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>CreditCard Business Service</name>
 	<description>CreditCard Business Service</description>
 	<properties>
@@ -18,21 +18,33 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-tomcat</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>com.feib.integration.common</groupId>
+			<artifactId>creditcard-common</artifactId>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-undertow</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+    
+        <!-- Spring monitor -->
+    	<dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-actuator</artifactId>
+    	</dependency>
+
+        <dependency>
+          <groupId>io.opentracing.contrib</groupId>
+          <artifactId>opentracing-spring-cloud-starter</artifactId>
+          <version>0.5.9</version>
+        </dependency>
+    
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>

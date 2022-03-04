@@ -160,10 +160,10 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jxr-plugin</artifactId>                      
-        <version>${maven-jxr-plugin.version}</version>                  
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>${maven-jxr-plugin.version}</version>
       </plugin>
-    </plugins>      
+    </plugins>
   </reporting>
   <!--
   <distributionManagement>
@@ -183,5 +183,6 @@
     <module>parent-boot-2</module>
     <module>creditcard-integration</module>
     <module>creditcard-business</module>
-  </modules>  
+    <module>creditcard-common</module>
+  </modules>
 </project>

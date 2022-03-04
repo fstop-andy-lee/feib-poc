@@ -1,33 +1,29 @@
 package com.feib.business.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.feib.api.annotation.WebAdapter;
 import com.feib.business.api.entity.TransactionDetailsRequestVO;
 import com.feib.business.api.entity.TransactionDetailsResponseVO;
 import com.feib.business.api.service.CreditCardService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-@Api(tags = "CreditCard")
-@RestController
-@RequestMapping("/api")
-public class CreditCardController {
+@RequiredArgsConstructor
+@Slf4j
+@WebAdapter
+public class CreditCardController implements CreditCardApi {
 
-	@Autowired
-	private CreditCardService creditCardService;
+  @Autowired
+  private CreditCardService creditCardService;
 
-	@ApiOperation(value = "查詢信用卡帳單交易明細", notes = "查詢信用卡帳單交易明細")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = TransactionDetailsResponseVO.class) })
-	@PostMapping(value = "/transactionDetails", consumes = "application/json", produces = "application/json")
-	public TransactionDetailsResponseVO queryTransactionDetails(@RequestBody TransactionDetailsRequestVO transactionDetailsRequestVO) {
-		return creditCardService.queryTransactionDetails(transactionDetailsRequestVO);
-	}
+  @Override
+  public TransactionDetailsResponseVO queryTransactionDetails(
+      @RequestBody TransactionDetailsRequestVO transactionDetailsRequestVO) {
+    log.debug("queryTransactionDetails {}", transactionDetailsRequestVO.toString());
+    return creditCardService.queryTransactionDetails(transactionDetailsRequestVO);
+  }
 
 }

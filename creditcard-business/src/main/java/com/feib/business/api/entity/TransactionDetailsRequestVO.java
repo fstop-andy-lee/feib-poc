@@ -8,7 +8,8 @@ import lombok.Data;
 @ApiModel(value = "TransactionDetailsRequestVO", description = "交易明細請求條件")
 public class TransactionDetailsRequestVO {
 
-	@ApiModelProperty("消費者ID")
+	@ApiModelProperty(notes = "消費者ID", example = "A123XXX789")
+	//@JsonProperty("UserID")
 	private String userID;
 
 }
