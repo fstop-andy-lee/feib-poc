@@ -87,11 +87,33 @@ management:
 
 logging:
   file: business-api.log
-  pattern:
-    console: "%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"
+  #pattern:
+  #  console: "%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"
   level:
     com.feib: DEBUG
 #    org.hibernate.SQL: DEBUG
 #    org.springframework: DEBUG
 #    org.springframework.http.client: DEBUG
     org.springframework.web.client.RestTemplate: DEBUG
+
+efk:
+  fluentd:
+    host: "127.0.0.1"
+    port: "24224"
+
+opentracing:
+  spring:
+    cloud:
+      jdbc:
+        enabled: false
+      log:
+        enabled: true
+  jaeger:
+    enabled: true
+    log-spans: true  
+    service-name: ${spring.application.name}
+    udp-sender:
+      host: 10.106.220.158
+      port: 6831
+    const-sampler:
+      decision: true
