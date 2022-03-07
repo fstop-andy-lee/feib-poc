@@ -101,19 +101,21 @@ efk:
     host: "127.0.0.1"
     port: "24224"
 
-opentracing:
-  spring:
-    cloud:
-      jdbc:
-        enabled: false
-      log:
-        enabled: true
-  jaeger:
-    enabled: true
-    log-spans: true  
-    service-name: ${spring.application.name}
-    udp-sender:
-      host: 10.106.220.158
-      port: 6831
-    const-sampler:
-      decision: true
+#opentracing:
+#  spring:
+#    cloud:
+#      jdbc:
+#        enabled: false
+#      log:
+#        enabled: true
+#  jaeger:
+#    enabled: true
+#    log-spans: true  
+#    service-name: ${spring.application.name}
+#    udp-sender:
+#      host: 10.106.220.158
+#      port: 6831
+#    probabilistic-sampler:
+#      sampling-rate: 1.0
+#    const-sampler:
+#      decision: true
