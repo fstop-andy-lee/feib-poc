@@ -108,15 +108,75 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.4.4</version>
-			</plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-jar-plugin</artifactId>
+              <version>2.4</version>
+              <configuration>
+                <excludes>
+                  <exclude>**/application-develop.yml</exclude>
+                </excludes>
+                <archive>
+                  <manifest>
+                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                  </manifest>
+                  <manifestEntries>
+                    <Implementation-Build>${buildNumber}</Implementation-Build>
+                  </manifestEntries>
+                </archive>
+              </configuration>        
+            </plugin>			
+            <plugin>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-maven-plugin</artifactId>
+              <version>2.4.4</version>
+              <configuration>
+                <!-- 
+                <layers>
+                  <enabled>true</enabled>
+                </layers>
+                -->
+                <fork>true</fork>
+                <!-- 無法用 unzip 解開, 為 shell script -->
+                <!--  <executable>true</executable> -->
+                <mainClass>com.feib.business.api.FeibCreditCardBusinessServiceApplication</mainClass>
+                <executable>false</executable>          
+                <arguments>
+                  <argument>--spring.profiles.active=dev</argument>
+                </arguments>
+                <jvmArguments>
+                  -Xdebug
+                  -Djava.awt.headless=false
+                </jvmArguments>          
+              </configuration>
+              <dependencies>
+                <dependency>
+                  <groupId>org.springframework</groupId>
+                  <artifactId>springloaded</artifactId>
+                  <version>1.2.8.RELEASE</version>
+                </dependency>
+              </dependencies>        
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>repackage</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>2.21.0</version>
+              <configuration>
+                <skipTests>true</skipTests>
+              </configuration>
+            </plugin>    
+			<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-        <version>3.0.0</version>
+                <version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -126,6 +186,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 		</plugins>
 	</build>
 </project>
