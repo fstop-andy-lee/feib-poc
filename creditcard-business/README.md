@@ -1,5 +1,5 @@
 ## Swagger API UI
-http://localhost:9090/business/swagger-ui/index.html
+http://localhost:9070/swagger-ui/index.html
 
 ## 程式架構
 主要包括Framework & Driver層、Interface Adapter層、Use Case層與Entity層
