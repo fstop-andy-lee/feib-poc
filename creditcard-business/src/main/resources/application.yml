@@ -55,8 +55,12 @@ spring:
       force: true
 
   mvc:
-    pathmatch:
-      matching-strategy: ant-path-matcher
+    #pathmatch:
+    #  matching-strategy: ant-path-matcher
+    #static-path-pattern: /app/**
+    #resources:
+    #  # classpath:/files/,classpath:/static-files,file:/opt/files
+    #  static-locations: classpath:/static/pages
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp    

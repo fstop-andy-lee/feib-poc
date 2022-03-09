@@ -10,7 +10,7 @@
   
 	<groupId>com.feib.business.api</groupId>
 	<artifactId>creditcard-business</artifactId>
-	<version>0.0.1</version>
+
 	<name>CreditCard Business Service</name>
 	<description>CreditCard Business Service</description>
 	<properties>
@@ -107,6 +107,8 @@
 	</dependencies>
 
 	<build>
+	    <finalName>${project.artifactId}-${project.version}</finalName>
+        <defaultGoal>spring-boot:run</defaultGoal>
 		<plugins>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -114,7 +116,7 @@
               <version>2.4</version>
               <configuration>
                 <excludes>
-                  <exclude>**/application-develop.yml</exclude>
+                  <exclude>**/application-*.yml</exclude>
                 </excludes>
                 <archive>
                   <manifest>
@@ -131,16 +133,11 @@
               <artifactId>spring-boot-maven-plugin</artifactId>
               <version>2.4.4</version>
               <configuration>
-                <!-- 
-                <layers>
-                  <enabled>true</enabled>
-                </layers>
-                -->
-                <fork>true</fork>
-                <!-- 無法用 unzip 解開, 為 shell script -->
-                <!--  <executable>true</executable> -->
+                <!--  <classifier>exec</classifier> 分檔-->
+                <!-- <layout>NONE</layout>  -->                 
                 <mainClass>com.feib.business.api.FeibCreditCardBusinessServiceApplication</mainClass>
-                <executable>false</executable>          
+                <fork>true</fork>
+                <executable>false</executable>
                 <arguments>
                   <argument>--spring.profiles.active=dev</argument>
                 </arguments>
@@ -149,13 +146,15 @@
                   -Djava.awt.headless=false
                 </jvmArguments>          
               </configuration>
+              <!-- 
               <dependencies>
                 <dependency>
                   <groupId>org.springframework</groupId>
                   <artifactId>springloaded</artifactId>
                   <version>1.2.8.RELEASE</version>
                 </dependency>
-              </dependencies>        
+              </dependencies>
+               -->        
               <executions>
                 <execution>
                   <goals>

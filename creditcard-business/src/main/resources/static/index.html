@@ -1,0 +1,75 @@
+<!-- <!DOCTYPE html> -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>FEIB POC Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+
+<body>
+<h1>Transaction Details</h1>
+
+<form action="" id="txform" method="post">
+  <label for="userID">User ID:</label>
+  <input type="text" id="userID" name="userID" autocomplete="off"><br><br>
+  <input type="submit" value="Submit"></input>
+</form>
+
+<div id="report"></div>
+
+<script charset="text/javascript" src="/business/jquery.min.js"></script>
+<script>
+// curl -X POST "http://localhost:9070/business/api/transactionDetails" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"userID\":\"A123XXX789\"}"
+var url = "http://localhost:9070/business/api/transactionDetails";
+
+const form  = document.getElementById('txform');
+
+var postJsonData= new Object();
+
+
+function tx(txData) {
+	var ajaxSettings = {
+			  "url": url,
+			  "method": "POST",
+			  "timeout": 0,
+			  "headers": {
+		      "Content-Type": "application/json",
+		      "X-ClientID": "CorpWeb",
+		      "X-GUID": "e478ebbd-0d0c-4f35-8939-ab31f00af492",
+		      "X-TXID": "QS0001",
+		      "Accept-Language": "zh-TW"     
+			  },
+			  "aync": false,
+		      "dataType": "json",
+			  "data": JSON.stringify(txData),
+			  "error": function(jqXHR, textStatus, errorThrown) {
+		        console.log("ajax error =" + jqXHR);
+			  }
+	};
+
+	$.ajax(ajaxSettings).done(function (response) {
+		  console.log(response);
+		  //var data = JSON.parse(response); // data.code, data.message ?
+		  authRep = response.Body.rep;
+		  console.log("ajax result = " + "");
+    });	
+}
+
+form.addEventListener('submit', (event) => {
+    // handle the form data
+	event.preventDefault();
+	console.log("submit");
+	var textbox = document.getElementById('userID');
+	postJsonData.userID = textbox.value;
+	console.log(">>>" + textbox.value);
+	console.log(">>>" + JSON.stringify(postJsonData));
+    tx(postJsonData);
+});
+
+
+</script>
+</body>
