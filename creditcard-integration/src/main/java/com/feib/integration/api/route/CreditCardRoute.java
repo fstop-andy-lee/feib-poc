@@ -28,8 +28,8 @@ public class CreditCardRoute extends RouteBuilder {
         .to("bean:creditCardProcessor?method=ivr9013").post("/ivr9014")
         .description("IVR9014 Service.").outType(IVR9014ResponseVO.class)
         .param().name("id").type(RestParamType.body).description("The consumer id.").dataType("string").endParam()
-        .param().name("seq").type(RestParamType.body).description("The detail sequence number.")
-        .dataType("string").endParam().to("bean:creditCardProcessor?method=ivr9014");
+        .param().name("seq").type(RestParamType.body).description("The detail sequence number.").dataType("string").endParam()
+        .to("bean:creditCardProcessor?method=ivr9014");
   }
 
 }

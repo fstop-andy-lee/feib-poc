@@ -1,9 +1,10 @@
+
 C:\java\jdk-15.0.1\bin\java ^
-    -javaagent:lib/opentelemetry-javaagent.jar ^
-    -Dotel.resource.attributes="service.name=creditcard-business" ^
-    -Dotel.exporter.otlp.endpoint=http://localhost:8200 ^
-    -Dotel.traces.exporter=jaeger ^
-    -Dotel.javaagent.debug=false ^
+    -javaagent:lib/elastic-apm-agent-1.29.0.jar ^
+    -Delastic.apm.service_name=creditcard-business ^
+    -Delastic.apm.server_urls=http://127.0.0.1:8200 ^
+    -Delastic.apm.secret_token= ^
+    -Delastic.apm.application_packages=com.feib ^
     -cp conf;lib/* ^
     -Dspring.application.admin.enabled=false ^
     -Dfile.encoding=UTF8 ^

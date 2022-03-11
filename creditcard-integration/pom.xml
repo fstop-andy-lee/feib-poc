@@ -12,7 +12,7 @@
   
 	<groupId>com.feib.integration.api</groupId>
 	<artifactId>creditcard-integration</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<name>CreditCard Integration Service</name>
 	<description>CreditCard Integration Service</description>
 	<properties>
@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>com.feib.integration.common</groupId>
 			<artifactId>creditcard-common</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 		</dependency>
 		
 		<dependency>

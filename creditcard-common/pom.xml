@@ -12,7 +12,7 @@
 
   <groupId>com.feib.integration.common</groupId>
   <artifactId>creditcard-common</artifactId>
-  <version>0.0.1</version>
+  <version>1.0.0</version>
   <name>CreditCard Common Package</name>
   <description>CreditCard Common Package</description>
 
@@ -57,6 +57,12 @@
       <groupId>io.opentracing.contrib</groupId>
       <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
       <version>3.2.0</version>
+    </dependency>
+    
+    <!-- amqp -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-amqp</artifactId>
     </dependency>
     
     <!-- 
