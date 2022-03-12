@@ -84,8 +84,8 @@ spring:
    addresses: localhost:5672
    adminAddresses: http://localhost:15672
    nodes: rabbit@localhost
-   username: guest
-   password: guest
+   username: andy
+   password: 123qwe
    virtual-host: /
    useSSL: false
    sslProperties:
@@ -128,10 +128,6 @@ efk:
   fluentd:
     host: "127.0.0.1"
     port: "24224"
-
-feature:
-  # 0=asyncQ, 1=syncQ, 2=api
-  adapter-type: 0
 
 #opentracing:
 #  spring:

@@ -30,18 +30,17 @@ public abstract class BaseIntegration<I, O> implements BaseIntegrationAdapter<I,
   
   private final ObjectMapper objectMapper = new ObjectMapper();
   
-  private Class<O> returnClass;
+  protected Class<O> returnClass;
   
-  private String apiUrl;
+  protected String apiUrl;
   
-  private String channelName;
+  protected String channelName;
   
   public BaseIntegration() {}
   
-  public BaseIntegration(String channelName, String apiUrl, Class<O> cls) {
+  public BaseIntegration(String channelName, String apiUrl) {
     this.channelName = channelName;
     this.apiUrl = apiUrl;
-    this.returnClass = cls;
   }
   
   public String getApiUrl() {
@@ -70,7 +69,7 @@ public abstract class BaseIntegration<I, O> implements BaseIntegrationAdapter<I,
   @Override
   public O ByEvent(I vo) {
     O ret = null;
-    
+    log.debug(">>>ByEvent {}", vo.toString());
     //呼叫 
     Object obj = rabbitTemplate.convertSendAndReceive(channelName, vo); 
     if (obj == null) {
@@ -89,6 +88,7 @@ public abstract class BaseIntegration<I, O> implements BaseIntegrationAdapter<I,
 
   @Override
   public O ByApi(I vo) {
+    log.debug(">>>ByAPI {}", vo.toString());
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     
