@@ -26,18 +26,18 @@ public class CreditCardController extends BaseController implements CreditCardAp
       @RequestBody TransactionDetailsRequestVO transactionDetailsRequestVO) {
     
     Span sp = startTrace("Start queryTransactionDetails");
-    
+    TransactionDetailsResponseVO ret = null;
     try {
       log.debug("queryTransactionDetails {}", transactionDetailsRequestVO.toString());  
       traceDebug(sp, "input queryTransactionDetails " + transactionDetailsRequestVO.toString());
-      return creditCardService.queryTransactionDetails(transactionDetailsRequestVO);      
+      ret = creditCardService.queryTransactionDetails(transactionDetailsRequestVO);    
     } catch(Exception e) {
-      traceError(sp, e.getMessage());      
+      traceError(sp, e.getMessage()); 
+      log.error(e.getMessage(), e);
     } finally {
       endTrace(sp);
     }
-
-    return null;    
+    return ret;  
   }
 
 }

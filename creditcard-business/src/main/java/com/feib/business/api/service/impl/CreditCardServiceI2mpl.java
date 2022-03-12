@@ -49,19 +49,17 @@ public class CreditCardServiceI2mpl implements CreditCardService {
       ivr9013RequestVO.setId(userID);        
       IVR9013ResponseVO ivr9013ResponseVO = null;
       
-      switch(adapterType) {
-        case ADAPTER_TYPE_API:
-          ivr9013ResponseVO = int9013.ByApi(ivr9013RequestVO);
-          break;
+      switch(adapterType) {       
         case ADAPTER_TYPE_ASYNCQ:
           //int9013.ByAsyncEvent(ivr9013RequestVO);           
           break;
         case ADAPTER_TYPE_SYNCQ:
           ivr9013ResponseVO = int9013.ByEvent(ivr9013RequestVO);
           break;
+        case ADAPTER_TYPE_API:
         default:
           ivr9013ResponseVO = int9013.ByApi(ivr9013RequestVO);
-      }      
+      }
       
       return ivr9013ResponseVO;
 	}
@@ -72,19 +70,17 @@ public class CreditCardServiceI2mpl implements CreditCardService {
       ivr9014RequestVO.setSeq(seq);
       IVR9014ResponseVO ivr9014ResponseVO = null;
       
-      switch(adapterType) {
-        case ADAPTER_TYPE_API:
-          ivr9014ResponseVO = int9014.ByApi(ivr9014RequestVO);
-          break;
+      switch(adapterType) {        
         case ADAPTER_TYPE_ASYNCQ:
-          ivr9014ResponseVO = int9014.ByEvent(ivr9014RequestVO);
+          //int9014.ByAsyncEvent(ivr9014RequestVO);                     
           break;
         case ADAPTER_TYPE_SYNCQ:
-          //int9013.ByAsyncEvent(ivr9013RequestVO);           
+          ivr9014ResponseVO = int9014.ByEvent(ivr9014RequestVO);
           break;
+        case ADAPTER_TYPE_API:
         default:
           ivr9014ResponseVO = int9014.ByApi(ivr9014RequestVO);
-      }      
+      }
       
       return ivr9014ResponseVO;
     }
@@ -112,6 +108,7 @@ public class CreditCardServiceI2mpl implements CreditCardService {
             process9014(transactionDetailsRequestVO.getUserID(), ivr9013ResponseDetailVO.getSeq());
 
         transactionDetailsPurchaseVO.setCardNo(ivr9014ResponseVO.getRealCardNo());
+        
         transactionDetailsPurchaseVOs.add(transactionDetailsPurchaseVO);
       }
       transactionDetailsResponseVO.setPurchase(transactionDetailsPurchaseVOs);

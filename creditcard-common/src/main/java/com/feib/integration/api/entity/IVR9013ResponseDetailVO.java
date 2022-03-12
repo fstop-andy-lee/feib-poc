@@ -1,11 +1,14 @@
 package com.feib.integration.api.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class IVR9013ResponseDetailVO {
+public class IVR9013ResponseDetailVO implements Serializable {
 
-	private String seq; // 序號
+  private static final long serialVersionUID = -4350428220291123584L;
+  private String seq; // 序號
 	private String acquireDate; // 清算日 西元年月日
 	private String purchaseDate; // 消費日 西元年月日
 	private String destinatiionAmt; // 台幣金額 ---------9

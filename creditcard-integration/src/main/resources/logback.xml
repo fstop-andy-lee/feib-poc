@@ -99,7 +99,7 @@
 	<springProfile name="dev">
         <root level="DEBUG">
 			<appender-ref ref="STDOUT" />
-            <appender-ref ref="FLUENT" />
+            <!-- <appender-ref ref="FLUENT" /> -->
 		</root>
     </springProfile>
     

@@ -1,14 +1,16 @@
 package com.feib.integration.api.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class IVR9013ResponseVO {
-
-	private String txID; // 交易代號 "IVR9013"
+public class IVR9013ResponseVO implements Serializable {
+	
+  private static final long serialVersionUID = 8105369867891649757L;
+  private String txID = "IVR9013"; // 交易代號 "IVR9013"
 	private String unitCD; // 單位代碼/回覆碼 "0000" 表示成功 非"0000" 表示異常
 	private String sendDate; // 西元年月日
 	private String sendTime; // 時分秒微秒

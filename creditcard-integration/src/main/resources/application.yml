@@ -76,12 +76,42 @@ spring:
     initializer:
       enabled: false
 
+  # RabbitMQ properties
+  rabbitmq:
+   addresses: localhost:5672
+   adminAddresses: http://localhost:15672
+   nodes: rabbit@localhost
+   username: andy
+   password: 123qwe
+   virtual-host: /
+   useSSL: false
+   sslProperties:
+   ssl:
+     keyStore:
+     keyStorePassphrase:
+     trustStore:
+     trustStorePassphrase:
+   channelCacheSize: 100
+   listener:
+     simple:
+       default-requeue-rejected: false
+       retry:
+         enabled: false
+       # auto, manual
+       acknowledge-mode: auto
+
 security:
   basic:
     enabled: false
 
 # Force enable health probes. Would be enabled on kubernetes platform by default
 management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+    health:
+      show-details: always
   health:
     probes:
       enabled: true
@@ -123,4 +153,12 @@ opentracing:
 camel:
   springboot:
     main-run-controller: true
+    route-controller-supervise-enabled: true
+    route-controller-back-off-max-attempts: 10
+  health:
+    enabled: true
+    # full, default, or oneline
+    exposure-level: default
+  component:
+    spring-rabbitmq.auto-declare: true
 

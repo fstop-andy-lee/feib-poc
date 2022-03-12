@@ -7,13 +7,13 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+//import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 import com.feib.integration.channel.LogMessageExceptionHandler;
 import com.feib.integration.channel.MessageExceptionHandler;
 
-@Configuration
+//@Configuration
 public class AmqpConfig {
 
   private static final String REP_QUEUE_NAME = "BusinessRepQueue";

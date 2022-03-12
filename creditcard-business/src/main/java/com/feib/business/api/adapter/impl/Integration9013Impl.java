@@ -1,5 +1,7 @@
 package com.feib.business.api.adapter.impl;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,16 +15,15 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class Integration9013Impl extends BaseIntegration<IVR9013RequestVO, IVR9013ResponseVO> implements Integration9013  {
 
-  
   @Value("${integration.int9013.url}")
-  String apiUrl;
+  private String apiUrl9013;
   
   @Value("${integration.int9013.channel}")
-  String channelName;
+  private String channelName9013;
   
   public Integration9013Impl() {
     super();
-    this.returnClass = IVR9013ResponseVO.class;
+    this.returnClass = IVR9013ResponseVO.class;    
   }
   
   public Integration9013Impl(String channelName, String apiUrl) {
@@ -39,5 +40,11 @@ public class Integration9013Impl extends BaseIntegration<IVR9013RequestVO, IVR90
   public void onFailure(Throwable ex) {
     log.error(ex.getMessage());
   }
-
+  
+  @PostConstruct
+  private void postConstruct() {
+    this.apiUrl = this.apiUrl9013;
+    this.channelName = this.channelName9013;
+  }
+  
 }

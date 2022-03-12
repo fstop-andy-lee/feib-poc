@@ -22,7 +22,7 @@ import com.feib.integration.api.entity.IVR9013ResponseVO;
 import com.feib.integration.api.entity.IVR9014RequestVO;
 import com.feib.integration.api.entity.IVR9014ResponseVO;
 
-//@Component
+@Component
 public class CreditCardServiceImpl implements CreditCardService {
 
 	private final static Logger logger = LoggerFactory.getLogger(CreditCardServiceImpl.class);

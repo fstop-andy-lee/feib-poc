@@ -1,10 +1,14 @@
 package com.feib.integration.api.entity;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class IVR9013RequestVO {
+public class IVR9013RequestVO implements Serializable {
 
-	private String id;
+  private static final long serialVersionUID = -3178024106147864985L;
+  
+  private String id;
 
 }

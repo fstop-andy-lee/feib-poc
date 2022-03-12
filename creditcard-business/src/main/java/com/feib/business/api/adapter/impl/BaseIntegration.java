@@ -1,6 +1,6 @@
 package com.feib.business.api.adapter.impl;
 
-import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
+//import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,8 +22,8 @@ public abstract class BaseIntegration<I, O> implements BaseIntegrationAdapter<I,
   @Autowired
   protected RabbitTemplate rabbitTemplate;
   
-  @Autowired
-  protected AsyncRabbitTemplate asyncRabbitTemplate;
+  //@Autowired
+  //protected AsyncRabbitTemplate asyncRabbitTemplate;
     
   @Autowired
   protected RestTemplate restTemplate;
@@ -69,21 +69,30 @@ public abstract class BaseIntegration<I, O> implements BaseIntegrationAdapter<I,
   @Override
   public O ByEvent(I vo) {
     O ret = null;
-    log.debug(">>>ByEvent {}", vo.toString());
+    Object obj = null;
+    log.debug(">>>ByEvent {} {}", channelName, vo.toString());
     //呼叫 
-    Object obj = rabbitTemplate.convertSendAndReceive(channelName, vo); 
+    try {
+      obj = rabbitTemplate.convertSendAndReceive(channelName, vo);       
+    } catch(Exception e) {
+      log.error(e.getMessage(), e);
+    }
+    
+    log.debug("<<<");
     if (obj == null) {
+      log.debug("rabbitTemplate get null object");
       return ret;        
     }
-    ret = (O) obj;          
+    ret = (O) obj;  
+    log.debug("ret {}", ret.toString());
     return ret;
   }
 
   @Override
   public void ByAsyncEvent(I vo) {
-    AsyncRabbitTemplate.RabbitConverterFuture<O> future =
-        asyncRabbitTemplate.convertSendAndReceive(channelName, vo);
-    future.addCallback(this);
+    //AsyncRabbitTemplate.RabbitConverterFuture<O> future =
+    //    asyncRabbitTemplate.convertSendAndReceive(channelName, vo);
+    //future.addCallback(this);
   }
 
   @Override
