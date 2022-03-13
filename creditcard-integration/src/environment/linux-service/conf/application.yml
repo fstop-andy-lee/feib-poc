@@ -1,6 +1,6 @@
 server:
   address: 0.0.0.0
-  port: 9070
+  port: 7070
   servlet:
     contextPath: /
 
@@ -27,14 +27,15 @@ spring:
       enabled: true
 
   application:
-    name: business-api
+    name: integration-api
+
+
+  lifecycle:
+    timeout-per-shutdown-phase: 1m
 
   ## enabling overriding by setting spring.main.allow-bean-definition-overriding=true
   main:
     allow-bean-definition-overriding: true
-
-  lifecycle:
-    timeout-per-shutdown-phase: 1m
 
   jackson:
     serialization:
@@ -55,12 +56,8 @@ spring:
       force: true
 
   mvc:
-    #pathmatch:
-    #  matching-strategy: ant-path-matcher
-    #static-path-pattern: /app/**
-    #resources:
-    #  # classpath:/files/,classpath:/static-files,file:/opt/files
-    #  static-locations: classpath:/static/pages
+    pathmatch:
+      matching-strategy: ant-path-matcher
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp    
@@ -109,14 +106,20 @@ security:
 
 # Force enable health probes. Would be enabled on kubernetes platform by default
 management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+    health:
+      show-details: always
   health:
     probes:
       enabled: true
 
 logging:
-  file: business-api.log
-  #pattern:
-  #  console: "%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"
+  file: integration-api.log
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"
   level:
     com.feib: DEBUG
 #    org.hibernate.SQL: DEBUG
@@ -129,21 +132,33 @@ efk:
     host: "127.0.0.1"
     port: "24224"
 
-#opentracing:
-#  spring:
-#    cloud:
-#      jdbc:
-#        enabled: false
-#      log:
-#        enabled: true
-#  jaeger:
-#    enabled: true
-#    log-spans: true  
-#    service-name: ${spring.application.name}
-#    udp-sender:
-#      host: 10.106.220.158
-#      port: 6831
-#    probabilistic-sampler:
-#      sampling-rate: 1.0
-#    const-sampler:
-#      decision: true
+opentracing:
+  spring:
+    cloud:
+      jdbc:
+        enabled: false
+      log:
+        enabled: true
+  jaeger:
+    enabled: true
+    log-spans: true  
+    service-name: ${spring.application.name}
+    udp-sender:
+      host: 10.106.220.158
+      port: 6831
+    const-sampler:
+      decision: true
+
+# to keep the JVM running
+camel:
+  springboot:
+    main-run-controller: true
+    route-controller-supervise-enabled: true
+    route-controller-back-off-max-attempts: 10
+  health:
+    enabled: true
+    # full, default, or oneline
+    exposure-level: default
+  component:
+    spring-rabbitmq.auto-declare: true
+

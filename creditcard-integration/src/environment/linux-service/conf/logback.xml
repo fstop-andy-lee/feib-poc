@@ -2,7 +2,7 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 	
-    <springProperty scope="context" name="springAppName" source="spring.application.name" />
+	<springProperty scope="context" name="springAppName" source="spring.application.name" />
     <springProperty scope="context" name="env" source="spring.profiles.active" defaultValue="dev"/>
 	<springProperty scope="context" name="fluentHost" source="efk.fluentd.host"/>
     <springProperty scope="context" name="fluentPort" source="efk.fluentd.port" defaultValue="24224" />
@@ -83,23 +83,23 @@
                 </pattern>
             </providers>
         </encoder>
-    </appender>
+    </appender>    
      	
 	<root level="INFO">
 		<appender-ref ref="CONSOLE" />
 	</root>
-
+	
 	<!-- 
 	<logger name="com.feib" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="DRF" />  
 	</logger>
-	 -->        
+	 -->
 	
 	<springProfile name="dev">
         <root level="DEBUG">
 			<appender-ref ref="STDOUT" />
-            <!-- <appender-ref ref="FLUENT" /> -->
+      <appender-ref ref="FLUENT" />
 		</root>
     </springProfile>
     
@@ -108,7 +108,6 @@
 			<appender-ref ref="STDOUT" />
             <appender-ref ref="FLUENT" />
 		</root>
-    </springProfile>
-	
+    </springProfile>        
 	
 </configuration>
