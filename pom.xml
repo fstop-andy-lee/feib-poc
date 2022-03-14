@@ -184,5 +184,6 @@
     <module>creditcard-integration</module>
     <module>creditcard-business</module>
     <module>creditcard-common</module>
+    <module>creditcard-web</module>
   </modules>
 </project>
