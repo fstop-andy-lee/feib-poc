@@ -53,10 +53,10 @@
     </appender>
     
     <appender name="FLUENT" class="ch.qos.logback.more.appenders.DataFluentAppender">
-        <tag>debug</tag>
-        <label>normal</label>
+        <tag>application.log</tag>
+        <label>application</label>
         <remoteHost>${fluentHost}</remoteHost>
-        <port>${fluentPort}</port>
+        <port>24224</port>
 
         <additionalField>
             <key>env</key>
@@ -99,7 +99,7 @@
 	<springProfile name="dev">
         <root level="DEBUG">
 			<appender-ref ref="STDOUT" />
-            <!-- <appender-ref ref="FLUENT" /> -->
+            <appender-ref ref="FLUENT" />
 		</root>
     </springProfile>
     

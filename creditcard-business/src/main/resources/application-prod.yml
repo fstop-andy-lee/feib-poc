@@ -1,7 +1,7 @@
 efk:
   fluentd:
     host: "127.0.0.1"
-    port: "24224"
+    port: 24224
 
 integration:
   # 0=api, 1=asyncQ, 2=syncQ, 
